@@ -1,20 +1,24 @@
 # Design contract
 
-Revision: 1.0. These are engineering defaults, not a claim that the user approved a finished visual design.
+Revision: 1.1. User decision, 2026-10-22: the existing first frontend is rejected. Claude Design will propose a new frontend and design system for human review before implementation. The previous teal/slate palette, typography, sidebar, card layouts and other visual defaults are superseded; do not treat the current frontend as an approved reference.
 
-- Original Tally wordmark and interface. Do not copy competitor assets, text, CSS, or screenshots into the product.
-- shadcn/ui primitives, neutral/slate surfaces, teal primary accent, system sans font, tabular numerals for time. Shared CSS variables define color, radius, and spacing. Light/dark/system themes; system initially.
-- Desktop sidebar: Focus, Plan, Review, Analyze, Leaderboards, Challenges, Friends; Settings in the account area. Small screens use a navigation sheet. Every route retains access to an active timer indicator.
-- Focus is the main screen: timer, selected task/tag, clear phase/mode, start/pause/resume/stop, compact configuration, notes, today's saved focus and current session separated. Pending phase transitions require an explicit action.
-- Plan provides list/board views over the same tasks. Three fixed states. Support keyboard/touch drag, plus an explicit status control. Filters and task totals are consistent across views.
-- Review places date/filter controls above chronological session cards. Distinguish manual, timing-edited, deleted, focus, and break records using text/icons as well as color. Explain unranked status. Timing edit views show intervals and preserved history.
-- Analyze uses a shared date range, summary cards, charts plus accessible text/table summaries, calendar, tag/task breakdown, goals, and streak explanation. Label personal versus group time zone wherever boundaries matter.
-- Leaderboards expose period/date/group-friends/country controls, explicit opt-in, own rank, sorted rows, shared ties, and rule explanation. No implied verification of productive work.
-- Challenges separate overview, own progress, community results, and history. Sharing defaults off. Wall of fame shows only opted-in achievements.
-- Friends/profile screens expose only approved basic profile fields and consented aggregate statistics. Private logs never appear on a friend's profile.
-- Markdown editor is a labeled text area with preview, no rich-text toolbar, raw HTML, or remote image rendering. Preserve drafts on a save failure.
-- Show real loading, empty, denied, conflict, disconnected, and save-failed states. No fake seeded production statistics, silent failures, or placeholder actions presented as working features.
-- Keep JavaScript-dependent controls disabled until hydrated, so early clicks cannot silently do nothing.
-- Use semantic landmarks, labels, visible focus, sufficient contrast, reduced-motion preferences, and keyboard access. Charts must have text equivalents. A timer need not announce every second to screen readers; announce phase/state changes.
-- Destructive confirmations explain scope; offer export access before reset/deletion. Ordinary saves and navigation do not need confirmation dialogs.
-- Initial language: English. Mobile layouts must work at 360px without horizontal page overflow; desktop review at 1440px. Tables may scroll within their own region.
+## Design exploration
+
+- The standalone [Claude Design brief](design/claude-design-brief.md) describes product scope, workflows, required behavior and deliverables without prescribing a concrete visual system. The user will provide it to Claude Design; no external service has been contacted by this task.
+- Claude Design may choose visual identity, palette, typography, spacing/density, component styling, navigation and screen grouping. Use original Tally design, not competitor assets, layouts, text or source.
+- The implementation stack remains TypeScript, React/TanStack Start, Tailwind CSS and shadcn/ui. The primitives are an implementation foundation, not a required stock appearance. Existing backend/domain behavior and shared contracts remain reusable.
+- Sketches/prototypes are proposals. Save the selected proposal and human decision in the repository before changing the frontend; update this contract and affected tasks then. This brief does not authorize a redesign implementation or merge. Track release changes requested in [APPROVALS.md](APPROVALS.md).
+
+## Functional and interaction constraints
+
+- Preserve PLAN.md capabilities and CONTRACTS.md time-record/privacy rules. Capability labels do not require matching pages or fixed navigation.
+- Keep the current timer accessible across navigation. Show mode, phase, running/paused/completed state and confirmed versus provisional time. Next phases require explicit start. Preserve input on save failures and clearly resolve conflicting device edits.
+- Planning provides list/Kanban, ordering, three task states, filters and explicit task completion. Dragging has a keyboard/touch-friendly non-drag alternative.
+- Review distinguishes manual, timing-corrected, deleted, focus and break records through text/icons as well as color. Explain competitive eligibility and preserved correction history.
+- Analytics expose required periods/breakdowns/goals/streaks with accessible text/table equivalents for charts; label personal/group calendar context where it affects results.
+- Member profiles expose only approved fields and consented aggregates. Emails, tasks, tags, session details, notes and exports stay private. Leaderboards and challenge results have separate opt-ins.
+- Markdown writing/preview must remain safe: no raw HTML or embedded images. The interaction pattern is open to design exploration.
+- Show loading, empty, denied, conflict, disconnected, validation and save-failed states. Never show failed writes as saved or fake demo data as production statistics.
+- Keep JavaScript-dependent actions disabled until hydrated. Use semantic controls, labels, keyboard access, visible focus, sufficient contrast, reduced motion and usable touch targets. Do not announce every timer second.
+- Destructive confirmations explain reset/deletion scope and offer export access first. Ordinary saves/navigation do not require confirmation dialogs.
+- Initial language: English. Responsive use starts at 360px; avoid page overflow. Support light/dark/system appearance. Exact breakpoints, layout and visual tokens remain the designer's choice.

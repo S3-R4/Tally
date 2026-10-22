@@ -11,6 +11,7 @@ Required stack: TypeScript, TanStack Start, Tailwind CSS, shadcn/ui, Better Auth
 - [Current checkpoint](docs/STATE.md) records where to resume, existing branches, pending work, and verification limits without relying on chat history.
 - [PLAN.md](PLAN.md) records the user's decisions, engineering defaults, scope, and acceptance criteria.
 - [Research](docs/RESEARCH.md) distinguishes observed Kairu features from advertised behavior and unverified assumptions.
+- [Claude Design brief](docs/design/claude-design-brief.md) is the standalone prompt for the replacement frontend; the current frontend was rejected and its visual defaults are superseded.
 - [Contracts](docs/CONTRACTS.md), [design](docs/DESIGN.md), and [workflow](docs/WORKFLOW.md) define shared implementation and handoff rules.
 - [Task ledger](docs/tasks/README.md) records actual progress. A planned feature is not a completed feature.
 

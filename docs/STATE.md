@@ -4,9 +4,9 @@ Updated: 2026-10-22 (Europe/Berlin). This is a factual checkpoint, not another i
 
 ## Current objective and ownership
 
-- Latest user instruction: major changes go to pending/test branches and require explicit human approval before merge. At each new conversation/feature request check pending approvals, request testing/approval as a reminder, and continue authorized development.
-- Current owner: integrator; [T09](tasks/T09.md) records this documentation-only policy change. [A01](APPROVALS.md#a01--first-release) is pending human testing and merge approval for `codex/complete-first-release` into `main`. No approval is recorded; source task completion does not authorize integration.
-- First-release implementation tasks T00–T07 are recorded as complete in the [task ledger](tasks/README.md). Do not rebuild the application from an older branch. Use the existing implementation and inspect actual source/tests for subsequent changes.
+- Latest user decision: the current frontend is rejected. Claude Design will sketch a replacement design system; the current task is to provide a detailed standalone brief while leaving visual choices open.
+- Current owner: integrator; [T10](tasks/T10.md) prepares the [Claude Design brief](design/claude-design-brief.md) and updates [DESIGN.md](DESIGN.md) to revision 1.1. No replacement implementation is assigned or approved. Existing backend/domain behavior is reusable.
+- [A01](APPROVALS.md#a01--first-release) is changes requested, not approved for merge. Initial T00–T07 source completion is historical and does not mean the redesigned frontend is complete. Do not ask the user to approve the rejected frontend again; obtain review of the replacement proposal when available. Other acceptance checks remain outstanding.
 
 ## Git snapshot and unpublished work
 
@@ -51,9 +51,9 @@ Updated: 2026-10-22 (Europe/Berlin). This is a factual checkpoint, not another i
 
 ## Next steps
 
-1. Check [pending approvals](APPROVALS.md) against current refs and available PR reviews at every new conversation/feature request; remind the user of A01 testing and required explicit merge approval. Continue independent work; dependent branches inherit the gate. Do not merge the release while approval is pending.
+1. Check [pending approvals](APPROVALS.md) against current refs and available PR reviews at every new conversation/feature request; report A01 changes requested and review the replacement proposal when available; do not treat the rejected frontend as awaiting routine approval. Continue independent work; dependent branches inherit the gate. Do not merge the release while approval is pending.
 
-2. The rule and accumulated documentation were published in 67cf138; T08 is complete. Verify the final checkpoint commit is synced using Git as described above, finishing any local/unpushed documentation edits under the standing rule. No new application task is assigned; await the next user task without rebuilding completed features.
+2. The rule and accumulated documentation were published in 67cf138; T08 is complete. Verify the final checkpoint commit is synced using Git as described above, finishing any local/unpushed documentation edits under the standing rule. T10 records the subsequent design brief; await a reviewed replacement proposal before frontend implementation and reuse existing domain code.
 3. Keep this checkpoint and the task ledger current before yielding, handing off, or starting long-running work. Future user decisions must be saved before dependent implementation.
 4. Standing user authorization now requires committing and pushing every change after required checks pass, including documentation/checkpoint edits. Do not ask again for routine commit/push approval or leave passing work local-only without recording a concrete publication blocker. Verify the remote result; running agents must fetch and reread the updated instructions. No other agents have been contacted by this documentation task.
 5. For any future feature/fix, verify existing branches and task state first, claim only remaining work, and follow the existing tests/contracts. Deployment and real OAuth acceptance remain separate operator steps; do not silently turn them into completed work.
@@ -63,3 +63,11 @@ Updated: 2026-10-22 (Europe/Berlin). This is a factual checkpoint, not another i
 - Preflight fetched all remotes and inspected branches, documentation history/diffs, task ownership and the sole worktree. Starting HEAD/upstream: 8d27897; main/origin/main: 484107b. Working tree was clean. Major-change approval rules were absent and are now documented without changing the application.
 - Documentation checks: targeted Prettier passed for all eight changed documents; pnpm exec vitest run tests/docs.test.ts passed (1 test, 0 failures; RTK JSON report inspected); git diff --check passed. Application/browser tests were not rerun for this documentation-only change. Publication follows verified checks on the existing pending branch; derive this checkpoint commit and push state from Git rather than embedding its own hash.
 - Hosted PR reviews and branch protection were not inspected; no approval or protection enforcement is assumed. A01 remains pending, with testing checklist saved. No merge, deployment or external-agent contact.
+
+## Latest design follow-up — T10
+
+- User rejected the first frontend and requested an extensive Claude Design prompt with functional constraints and creative freedom. Saved in PLAN.md, DESIGN.md 1.1 and APPROVALS.md before design work. The previous palette, typography and layout defaults are superseded.
+- Starting HEAD/upstream: 960b5f3; main/origin/main 484107b. Fetched remotes and inspected refs/history, sole worktree, task ownership and connected documents/source. No other pending implementation or owner found.
+- Brief covers all first-release areas, time/eligibility/privacy semantics, responsive/accessibility/error states, stack and review deliverables. This is a prompt artifact; Claude Design has not been contacted and no new frontend has been implemented.
+- Documentation checks: targeted Prettier passed for all eight changed documents; pnpm exec vitest run tests/docs.test.ts passed (1 test, 0 failures; RTK JSON report inspected); git diff --check passed. Manual coverage review checked the brief against PLAN.md/CONTRACTS.md. Publication follows verified checks under standing task-branch authorization; derive this checkpoint commit/sync state from Git. Full app/browser tests were not rerun for this documentation-only change.
+- Next: user supplies the brief to Claude Design, reviews the proposal, and records selected design/artifacts before assigning replacement implementation. Release integration still requires explicit human approval.

@@ -98,3 +98,7 @@ User instruction: every change that passes its required tests/checks must be com
 ## Human approval amendment — 2026-10-22
 
 User instruction: major changes must be pushed to test/pending branches and merged only after explicit human approval. Every new conversation and feature request must check pending approvals, remind the user what needs testing/approval, and continue authorized development without waiting for unrelated approvals. [Workflow](docs/WORKFLOW.md#human-approval-for-major-changes) defines classification, revision-scoped evidence, dependent work and integration; [approval ledger](docs/APPROVALS.md) records outstanding reviews. Tested-change commit/push authorization remains active; passing tests alone never grant merge approval. T09 records this policy change.
+
+## Frontend design replacement — 2026-10-22
+
+User decision: the first frontend will not be approved. Claude Design will explore a replacement design system using a detailed product brief that leaves visual choices open. The current palette/layout/component appearance is superseded, not an approved reference. Product scope, stack and backend contracts remain in force. [DESIGN.md](docs/DESIGN.md) revision 1.1 and the [Claude Design brief](docs/design/claude-design-brief.md) record constraints and deliverables. T10 prepares the brief only; implementation of the replacement waits for a human-reviewed proposal. Release A01 is changes requested, not ready for merge.
