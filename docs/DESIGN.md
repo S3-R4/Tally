@@ -4,6 +4,7 @@ Revision: 1.1. User decision, 2026-10-22: the existing first frontend is rejecte
 
 ## Design exploration
 
+- User clarification (2026-10-22): Claude Design will not see the existing frontend. The external prompt must describe Tally independently, without prior-design, replacement/reskin or implementation-reuse framing. Keep rejection history in internal project records only.
 - The standalone [Claude Design brief](design/claude-design-brief.md) describes product scope, workflows, required behavior and deliverables without prescribing a concrete visual system. The user will provide it to Claude Design; no external service has been contacted by this task.
 - Claude Design may choose visual identity, palette, typography, spacing/density, component styling, navigation and screen grouping. Use original Tally design, not competitor assets, layouts, text or source.
 - The implementation stack remains TypeScript, React/TanStack Start, Tailwind CSS and shadcn/ui. The primitives are an implementation foundation, not a required stock appearance. Existing backend/domain behavior and shared contracts remain reusable.

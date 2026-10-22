@@ -2,7 +2,7 @@
 
 Design an original frontend and design system for **Tally**, a web application for planning focused work, tracking time, understanding habits and sharing selected progress with a private group.
 
-We are seeking a coherent product design proposal and reviewable sketches/prototype. The existing frontend is being replaced. Treat this as a fresh design exploration with established product behavior, rather than a visual reskin. The underlying functionality can be reused.
+Create a coherent product design proposal and reviewable sketches/prototype using the product requirements below. This brief is self-contained; no prior design or repository access is needed.
 
 ## Your creative scope
 
@@ -18,7 +18,7 @@ Tally serves individuals doing focused work within an approved private community
 
 Typical use ranges from a quick timer interaction to reviewing a dense history. Design for repeated daily use, both while someone is concentrating and while they are planning or reflecting. Let frequent actions remain easy to find without showing every advanced option at once. Avoid guilt-driven engagement, misleading productivity claims or pressure to share.
 
-The product is a working application, not a marketing site. It has no billing, subscription tiers, public signup or enterprise organization hierarchy.
+Design the application experience rather than a marketing site. It has no billing, subscription tiers, public signup or enterprise organization hierarchy.
 
 ## Core capabilities
 
@@ -123,4 +123,4 @@ The product is a working application, not a marketing site. It has no billing, s
 4. Key alternative states, especially a first-time empty workspace, paused/offline timer, correction/eligibility explanation, privacy opt-in and destructive confirmation. Show at least a representative light/dark pair and explain how the system extends across both.
 5. A short coverage/handoff note identifying screens and states shown, deferred sketches, reusable components/tokens, interaction behavior, accessibility considerations and open decisions. Separate optional future suggestions from the required scope.
 
-Prioritize a coherent, reviewable first proposal over an exhaustive set of disconnected screens. We will review the proposed system before implementation. You have room to challenge existing screen boundaries and choose the visual language; preserve the product capabilities, privacy boundaries and time-record semantics above.
+Prioritize a coherent, reviewable first proposal over an exhaustive set of disconnected screens. We will review the proposed system before implementation. You have room to choose screen boundaries and the visual language; preserve the product capabilities, privacy boundaries and time-record semantics above.
