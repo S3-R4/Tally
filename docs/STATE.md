@@ -5,17 +5,17 @@ Updated: 2026-10-22 (Europe/Berlin). This is a factual checkpoint, not another i
 ## Current objective and ownership
 
 - User instruction: preserve all actionable project information in repository documents so future agents and chats can resume without this conversation. Also require checking other branches before implementation to prevent duplicate work.
-- Current owner: integrator; task [T08](tasks/T08.md) is in progress for its publication follow-up. User instruction dated 2026-10-22 now requires committing and pushing every change after its required checks pass; this is standing authorization for ordinary task-branch commits/pushes. The accumulated documentation is being checked and published under that rule. Application behavior is unchanged.
+- Current owner: integrator; task [T08](tasks/T08.md) is complete. The coordination, persistence and tested-change publication rules were committed and pushed in 67cf138, and the remote ref was verified equal to the local commit. Every passing change, including this completion checkpoint, must be committed/pushed under that standing user authorization. Application behavior is unchanged; no new application task is assigned.
 - First-release implementation tasks T00–T07 are recorded as complete in the [task ledger](tasks/README.md). Do not rebuild the application from an older branch. Use the existing implementation and inspect actual source/tests for subsequent changes.
 
 ## Git snapshot and unpublished work
 
 - Fetched all remotes and inspected local/remote branches, history, the registered worktree, and task ownership on 2026-10-22.
 - Checkout/worktree: `/home/s3r4/Projects/Tally`, branch `codex/complete-first-release`.
-- `codex/complete-first-release` and `origin/codex/complete-first-release`: `9695f32` (`takla version`), containing the full first-release implementation. This branch was successfully pushed and its upstream configured. The normal command for subsequent authorized pushes is `git push`.
+- Published implementation base: `9695f32` (`takla version`). The coordination/persistence/publication policy was subsequently published in `67cf138` on `codex/complete-first-release` and `origin/codex/complete-first-release`; push succeeded and both refs were verified equal, with zero ahead/behind. The branch has an upstream; the normal command for passing changes is `git push`. This completion checkpoint follows that policy commit; derive its own latest commit/ref from Git rather than expecting a file to contain its own commit hash.
 - `main` and `origin/main`: `484107b` (`amogus`), the earlier foundation. No branch integration has occurred. Required integration style is `git merge --no-ff`.
 - Only this worktree and those two branch names were found. Unpublished work in other clones cannot be inferred from this inventory. Repeat the preflight before new work; these commit IDs are a snapshot.
-- Local documentation follow-up: AGENTS.md, PLAN.md, README.md, docs/WORKFLOW.md, docs/STATE.md, docs/tasks/README.md, docs/tasks/T07.md, and docs/tasks/T08.md. Inspect `git status` for the actual set. These follow-up edits have not been committed or pushed; other checkouts do not yet have them. Source commit `9695f32` is already published.
+- The accumulated documentation follow-up (AGENTS.md, PLAN.md, README.md, workflow/checkpoint/task records) is published in `67cf138`. This final completion checkpoint updates docs/STATE.md and task records under the same tested commit/push rule. Inspect `git status --short --branch`, `git log -1 -- docs/STATE.md`, and `git rev-list --left-right --count HEAD...@{upstream}` to verify the latest checkpoint itself is committed/synced. Any remaining local checkpoint edits must also pass documentation checks and be committed/pushed; do not assume completion from these words alone.
 - No deployment has been performed. Ordinary tested task-branch commits/pushes now have standing user authorization under AGENTS.md and docs/WORKFLOW.md. Branch integration, deployments, destructive operations and external-agent messaging are not authorized by that rule. Record publication from observed Git results; do not infer it from file edits.
 
 ## Authoritative information map
@@ -50,7 +50,7 @@ Updated: 2026-10-22 (Europe/Berlin). This is a factual checkpoint, not another i
 
 ## Next steps
 
-1. Verify the latest tested-change publication rule and accumulated documentation, then commit and push them to codex/complete-first-release. Confirm the remote ref, finalize T08/checkpoint, and publish that checked checkpoint update too. No new application task is assigned.
+1. The rule and accumulated documentation were published in 67cf138; T08 is complete. Verify the final checkpoint commit is synced using Git as described above, finishing any local/unpushed documentation edits under the standing rule. No new application task is assigned; await the next user task without rebuilding completed features.
 2. Keep this checkpoint and the task ledger current before yielding, handing off, or starting long-running work. Future user decisions must be saved before dependent implementation.
 3. Standing user authorization now requires committing and pushing every change after required checks pass, including documentation/checkpoint edits. Do not ask again for routine commit/push approval or leave passing work local-only without recording a concrete publication blocker. Verify the remote result; running agents must fetch and reread the updated instructions. No other agents have been contacted by this documentation task.
 4. For any future feature/fix, verify existing branches and task state first, claim only remaining work, and follow the existing tests/contracts. Deployment and real OAuth acceptance remain separate operator steps; do not silently turn them into completed work.
