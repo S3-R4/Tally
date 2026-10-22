@@ -1,4 +1,11 @@
-import { mkdtempSync, rmSync } from 'node:fs'
+import {
+  mkdtempSync,
+  rmSync,
+  mkdirSync,
+  copyFileSync,
+  readFileSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
@@ -86,4 +93,41 @@ describe('SQLite persistence contracts', () => {
       reopened.sqlite.close()
     }
   })
+})
+
+it('upgrades an existing first migration without losing records and supplies cycle defaults', () => {
+  const directory = mkdtempSync(join(tmpdir(), 'tally-upgrade-'))
+  paths.push(directory)
+  mkdirSync(join(directory, 'meta'))
+  copyFileSync(
+    'drizzle/0000_fixed_harry_osborn.sql',
+    join(directory, '0000_fixed_harry_osborn.sql'),
+  )
+  const journal = JSON.parse(readFileSync('drizzle/meta/_journal.json', 'utf8'))
+  journal.entries = journal.entries.slice(0, 1)
+  writeFileSync(join(directory, 'meta/_journal.json'), JSON.stringify(journal))
+  const { db, sqlite } = openDatabase(':memory:')
+  migrate(db, { migrationsFolder: directory })
+  const now = new Date()
+  db.insert(user)
+    .values({
+      id: 'existing',
+      name: 'Existing',
+      email: 'existing@example.com',
+      emailVerified: true,
+      createdAt: now,
+      updatedAt: now,
+    })
+    .run()
+  sqlite
+    .prepare(
+      "INSERT INTO focus_sessions (id,user_id,source,kind,mode,status,created_at_ms) VALUES ('existing-focus','existing','timer','focus','stopwatch','completed',1)",
+    )
+    .run()
+  migrate(db, { migrationsFolder: './drizzle' })
+  const record = db.select().from(focusSessions).get()!
+  expect(record.id).toBe('existing-focus')
+  expect(record.cycleFocusMinutes).toBe(25)
+  expect(record.cycleBreakMinutes).toBe(5)
+  sqlite.close()
 })

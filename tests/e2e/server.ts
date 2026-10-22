@@ -4,12 +4,14 @@ import { join } from 'node:path'
 import { spawn } from 'node:child_process'
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator'
 import { openDatabase } from '../../src/lib/server/db'
-import { instance, user, session } from '../../src/lib/server/schema'
+import { instance, user, session, members } from '../../src/lib/server/schema'
 import {
   fixtureSecret,
   fixtureURL,
   approvedToken,
   outsiderToken,
+  partnerToken,
+  workflowToken,
 } from './fixture'
 
 const directory = mkdtempSync(join(tmpdir(), 'tally-browser-'))
@@ -21,6 +23,7 @@ const now = new Date()
 for (const [id, email, token] of [
   ['approved', 'member@example.com', approvedToken],
   ['outsider', 'outsider@example.com', outsiderToken],
+  ['partner', 'partner@example.com', partnerToken],
 ]) {
   db.insert(user)
     .values({
@@ -43,25 +46,57 @@ for (const [id, email, token] of [
     })
     .run()
 }
+db.insert(session)
+  .values({
+    id: 'workflow-session',
+    userId: 'approved',
+    token: workflowToken,
+    expiresAt: new Date(Date.now() + 3_600_000),
+    createdAt: now,
+    updatedAt: now,
+  })
+  .run()
+db.insert(members)
+  .values({
+    userId: 'partner',
+    displayName: 'Partner',
+    timeZone: 'Europe/Berlin',
+  })
+  .run()
 sqlite.close()
 
 const server = spawn(
   process.execPath,
-  [
-    'node_modules/vite/bin/vite.js',
-    '--host',
-    '127.0.0.1',
-    '--port',
-    '3101',
-    '--strictPort',
-  ],
+  process.env.TALLY_E2E_PRODUCTION === '1'
+    ? [
+        'node_modules/srvx/bin/srvx.mjs',
+        '--prod',
+        '--host',
+        '127.0.0.1',
+        '--port',
+        '3101',
+        '--static',
+        '../client',
+        '--entry',
+        'dist/server/server.js',
+      ]
+    : [
+        'node_modules/vite/bin/vite.js',
+        '--host',
+        '127.0.0.1',
+        '--port',
+        '3101',
+        '--strictPort',
+      ],
   {
     stdio: 'inherit',
     env: {
       ...process.env,
+      NODE_ENV:
+        process.env.TALLY_E2E_PRODUCTION === '1' ? 'production' : 'development',
       TALLY_DATABASE_PATH: path,
       TALLY_TIME_ZONE: 'Europe/Berlin',
-      TALLY_ALLOWED_EMAILS: 'member@example.com',
+      TALLY_ALLOWED_EMAILS: 'member@example.com,partner@example.com',
       BETTER_AUTH_URL: fixtureURL,
       BETTER_AUTH_SECRET: fixtureSecret,
       GOOGLE_CLIENT_ID: 'fixture-client',

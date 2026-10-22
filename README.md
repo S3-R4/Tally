@@ -14,7 +14,9 @@ Required stack: TypeScript, TanStack Start, Tailwind CSS, shadcn/ui, Better Auth
 
 ## Current implementation
 
-The planning package is recorded. The application foundation includes a responsive sign-in page, protected account page, Google-only Better Auth, request-time allowlist checks, the shared Drizzle schema, migrations, backups, and automated checks. **The tracker, planning, reports, and social/challenge features are still scheduled in T02–T07.** This is not a completed tracker release.
+The first-release source covers countdown/stopwatch timers and recovery, tasks/tags/Kanban, manual records and timing revisions, personal reports/goals, profiles/friends/kudos, opt-in rankings, monthly/custom challenges, exports, and account/data controls. The workspace is at `/workspace`; tabs and filters are linkable search parameters. The plan and provider-independent agent instructions are saved in this repository.
+
+Source checks and local production verification passed: `pnpm check` (27 tests) and four Chromium journeys in each of development and production modes. [T07](docs/tasks/T07.md) records the checks and remaining limits. Live Google OAuth and deployment still need operator configuration and observed verification.
 
 ## Local setup
 
@@ -49,7 +51,8 @@ In Google Cloud, register `http://localhost:3000/api/auth/callback/google` as a 
 | `pnpm build` / `pnpm start`            | Build client/server bundles; run the production server on loopback.                        |
 | `pnpm check`                           | Formatting, lint, production build, TypeScript, domain/integration checks.                 |
 | `pnpm test`                            | Focused tests; the browser-bundle check is skipped if no build exists.                     |
-| `pnpm test:e2e`                        | Isolated Chromium checks with sign-in disabled; test server uses port 3100.                |
+| `pnpm test:e2e`                        | Chromium journeys with disposable databases and signed member fixtures, ports 3100/3101.   |
+| `pnpm test:e2e:production`             | Run the same journeys against the built production server. Build first.                    |
 | `pnpm db:generate` / `pnpm db:migrate` | Generate reviewed schema migrations; apply committed migrations.                           |
 | `pnpm db:backup`                       | Consistent online backup under `backups/`. An optional destination can follow the command. |
 

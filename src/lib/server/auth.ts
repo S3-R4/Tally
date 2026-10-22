@@ -17,6 +17,7 @@ function createAuth() {
       google: { clientId: config.clientId, clientSecret: config.clientSecret },
     },
     emailAndPassword: { enabled: false },
+    advanced: { ipAddress: { ipAddressHeaders: ['x-real-ip'] } },
     session: { cookieCache: { enabled: false } },
     databaseHooks: {
       user: {

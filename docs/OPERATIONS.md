@@ -35,6 +35,18 @@ WantedBy=multi-user.target
 
 The environment file's `TALLY_DATABASE_PATH` should be an absolute path such as `/var/lib/tally/tally.sqlite`, writable by `tally`. The application deployment and database directories have different lifecycles: redeploying source must not replace the database directory. `/health` is a liveness endpoint, not proof that Google sign-in or all database operations are ready.
 
+Example Caddy configuration (replace the domain):
+
+```caddyfile
+tally.example.com {
+    reverse_proxy 127.0.0.1:3000 {
+        header_up X-Real-IP {remote_host}
+    }
+}
+```
+
+Keep the application port on loopback. Caddy overwrites `X-Real-IP` with the connecting address; Better Auth uses that header for rate limiting. Do not expose the Node port directly or trust a client-supplied forwarding header. Verify the proxy path and client-IP behavior on the actual server. TanStack Start's CSRF middleware protects server-function requests; Better Auth protects its own OAuth routes.
+
 ## Backups
 
 `pnpm db:backup /PRIVATE_DESTINATION/tally-DATE.sqlite` uses the driver's online backup API, includes committed WAL data, and writes a mode-0600 destination. Do not copy only the live main `.sqlite` file.

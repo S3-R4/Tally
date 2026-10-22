@@ -16,7 +16,10 @@ export function openDatabase(path: string) {
   return { sqlite, db: drizzle(sqlite, { schema }) }
 }
 
-export type AppDatabase = ReturnType<typeof openDatabase>['db']
+type ConnectionDatabase = ReturnType<typeof openDatabase>['db']
+export type AppDatabase =
+  | ConnectionDatabase
+  | Parameters<Parameters<ConnectionDatabase['transaction']>[0]>[0]
 let connection: ReturnType<typeof openDatabase> | undefined
 export function database() {
   return (connection ??= openDatabase(

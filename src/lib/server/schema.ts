@@ -151,6 +151,8 @@ export const focusSessions = sqliteTable(
     deadlineAtMs: integer('deadline_at_ms'),
     round: integer('round').notNull().default(1),
     rounds: integer('rounds').notNull().default(4),
+    cycleFocusMinutes: integer('cycle_focus_minutes').notNull().default(25),
+    cycleBreakMinutes: integer('cycle_break_minutes').notNull().default(5),
     title: text('title').notNull().default(''),
     note: text('note').notNull().default(''),
     taskId: text('task_id').references(() => tasks.id, {
@@ -212,7 +214,7 @@ export const commands = sqliteTable(
     requestId: text('request_id').notNull(),
     fingerprint: text('fingerprint').notNull(),
     result: text('result', { mode: 'json' })
-      .$type<{ sessionId: string }>()
+      .$type<{ sessionId: string } | { challengeId: string }>()
       .notNull(),
   },
   (t) => [uniqueIndex('command_member_request_idx').on(t.userId, t.requestId)],

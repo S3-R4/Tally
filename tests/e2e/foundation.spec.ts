@@ -69,12 +69,12 @@ test('admits a signed approved session, signs out, and denies an unapproved exis
   await cookie(approvedToken)
   await page.goto(`${fixtureURL}/workspace`)
   await expect(
-    page.getByRole('heading', { name: 'Signed in to Tally.' }),
+    page.getByRole('heading', { name: 'Make room for focus.' }),
   ).toBeVisible()
   await expect(page.getByText('Private Google name')).toHaveCount(0)
   await expect(
-    page.getByText('You have not opted in to leaderboards.', { exact: false }),
-  ).toBeVisible()
+    page.getByRole('button', { name: 'Start focus', exact: true }),
+  ).toBeEnabled()
   await page.getByRole('button', { name: 'Sign out' }).click()
   await expect(page).toHaveURL(`${fixtureURL}/`)
   await expect(
