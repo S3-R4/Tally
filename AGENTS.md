@@ -51,6 +51,8 @@ This is the only agent instruction entrypoint, regardless of provider. Read it b
 
 ## Git and parallel work
 
+- At every new conversation, new feature request, and task resume, check [pending human approvals](docs/APPROVALS.md) and current branch/PR state. Remind the user of pending branches, what to test, and the approval needed. This blocks merging the affected changes, not further development; continue authorized work on isolated branches. Follow the [human approval workflow](docs/WORKFLOW.md#human-approval-for-major-changes).
+- Major changes must be pushed to a test/pending task branch and may only be merged after explicit human approval for the reviewed scope/revision and target. Automated tests or agent reviews never substitute for human approval.
 - Before starting or resuming any task, fetch all configured remotes and inspect local branches, remote branches, registered worktrees, and the task ledger. Follow the mandatory preflight in [docs/WORKFLOW.md](docs/WORKFLOW.md#check-existing-work-before-implementation).
 - Search other branches' commits, diffs, and source for the requested behavior before writing it. Absence from the current branch or `main` does not mean the feature is missing. Reuse, finish, or review existing work; do not independently rebuild it.
 - Check task ownership and uncommitted work in registered worktrees before claiming overlapping files. Record inspected refs/commit IDs, existing implementation, and the remaining work in the task handoff. Repeat the check before integration or when another agent's work may have advanced.

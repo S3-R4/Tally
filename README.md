@@ -7,6 +7,7 @@ Required stack: TypeScript, TanStack Start, Tailwind CSS, shadcn/ui, Better Auth
 ## Read first
 
 - Every agent/provider starts with [AGENTS.md](AGENTS.md).
+- [Pending human approvals](docs/APPROVALS.md) lists branches awaiting testing and explicit merge approval; check it on every new conversation or feature request.
 - [Current checkpoint](docs/STATE.md) records where to resume, existing branches, pending work, and verification limits without relying on chat history.
 - [PLAN.md](PLAN.md) records the user's decisions, engineering defaults, scope, and acceptance criteria.
 - [Research](docs/RESEARCH.md) distinguishes observed Kairu features from advertised behavior and unverified assumptions.

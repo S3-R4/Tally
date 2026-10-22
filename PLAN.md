@@ -94,3 +94,7 @@ User instruction: every actionable rule, requirement, decision, constraint, and 
 ## Tested-change publication amendment — 2026-10-22
 
 User instruction: every change that passes its required tests/checks must be committed and pushed. This is standing authorization for normal commits/pushes to the task branch, including documentation and instructions, without repeated confirmation. Agents must review/stage only the verified scope, verify the remote result, and record concrete blockers if publication fails. It does not authorize credentials/runtime-data publication, force-push/history rewriting, branch integration, deployment, or external-agent messaging. AGENTS.md and docs/WORKFLOW.md define the procedure; T08 includes publishing the accumulated coordination/persistence documentation.
+
+## Human approval amendment — 2026-10-22
+
+User instruction: major changes must be pushed to test/pending branches and merged only after explicit human approval. Every new conversation and feature request must check pending approvals, remind the user what needs testing/approval, and continue authorized development without waiting for unrelated approvals. [Workflow](docs/WORKFLOW.md#human-approval-for-major-changes) defines classification, revision-scoped evidence, dependent work and integration; [approval ledger](docs/APPROVALS.md) records outstanding reviews. Tested-change commit/push authorization remains active; passing tests alone never grant merge approval. T09 records this policy change.
