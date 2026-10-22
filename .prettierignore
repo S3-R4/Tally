@@ -1,0 +1,10 @@
+pnpm-lock.yaml
+src/routeTree.gen.ts
+drizzle/meta/
+dist/
+data/
+backups/
+.cache/
+playwright-report/
+test-results/
+

@@ -1,0 +1,139 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.985 0.004 220);
+  --foreground: oklch(0.24 0.03 235);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.49 0.105 183);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.955 0.01 220);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.955 0.008 220);
+  --muted-foreground: oklch(0.48 0.025 230);
+  --accent: oklch(0.94 0.025 180);
+  --accent-foreground: oklch(0.34 0.065 180);
+  --destructive: oklch(0.54 0.2 25);
+  --border: oklch(0.91 0.012 220);
+  --input: var(--border);
+  --ring: var(--primary);
+  --radius: 0.75rem;
+  --chart-1: var(--primary);
+  --chart-2: oklch(0.65 0.12 245);
+  --chart-3: oklch(0.72 0.14 75);
+  --chart-4: oklch(0.65 0.15 300);
+  --chart-5: oklch(0.66 0.16 20);
+}
+.dark {
+  --background: oklch(0.17 0.018 230);
+  --foreground: oklch(0.94 0.012 210);
+  --card: oklch(0.21 0.02 230);
+  --primary: oklch(0.74 0.12 175);
+  --primary-foreground: oklch(0.19 0.04 185);
+  --secondary: oklch(0.26 0.022 230);
+  --muted: oklch(0.25 0.02 230);
+  --muted-foreground: oklch(0.69 0.025 220);
+  --accent: oklch(0.29 0.04 185);
+  --accent-foreground: oklch(0.83 0.08 175);
+  --border: oklch(0.31 0.022 230);
+  --destructive: oklch(0.71 0.17 25);
+}
+@theme inline {
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply m-0 bg-background font-sans text-foreground antialiased;
+  }
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--accent);
+  }
+}
+.markdown {
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+}
+.markdown p + p {
+  margin-top: 0.75rem;
+}
+.markdown ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.markdown ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+.markdown a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.markdown pre {
+  overflow: auto;
+  padding: 0.75rem;
+  background: var(--muted);
+  border-radius: var(--radius);
+}
+.markdown code {
+  font-size: 0.875em;
+}
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  margin: 1rem 0 0.5rem;
+  font-weight: 650;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
