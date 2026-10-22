@@ -82,3 +82,15 @@ The user authorized recording the research and decisions, followed by implementa
 No billing, public signup, imports, full offline writes/sync, native application, push notifications, custom avatar uploads, AI features, calendar integrations, website blocking, or externally hosted database. Browser sound delivery while suspended cannot be guaranteed. No existing Kairu data is copied.
 
 Kairu's timer recovery, cross-device consistency, editing semantics, exports/imports, paid behavior, and backend implementation were not tested. Live Tally Google OAuth requires operator-provided credentials and callback configuration. Actual domain, server provisioning, and off-server backup destination are deployment inputs, not reasons to invent services or credentials.
+
+## Coordination amendment — 2026-10-22
+
+User instruction: agents must check other branches before starting or resuming work to avoid rebuilding existing features. AGENTS.md and docs/WORKFLOW.md now require fetching remotes, inspecting local/remote branches and worktrees, checking task ownership and existing implementations, and recording inspected commits plus the remaining work. This updates the shared agent workflow and T07 handoff; product behavior and contracts are unchanged.
+
+## Durable-context amendment — 2026-10-22
+
+User instruction: every actionable rule, requirement, decision, constraint, and aspect needed to continue work must be written in the repository because chats, context windows, and individual agents are temporary. AGENTS.md requires incremental persistence, and docs/WORKFLOW.md defines checkpoint/resume steps. docs/STATE.md provides the current checkpoint and links to authoritative documents; task files retain ownership, work/results, blockers, and next steps. This applies to every provider and future session, including after interruption or compaction. T08 records this documentation change; product behavior and contracts are unchanged.
+
+## Tested-change publication amendment — 2026-10-22
+
+User instruction: every change that passes its required tests/checks must be committed and pushed. This is standing authorization for normal commits/pushes to the task branch, including documentation and instructions, without repeated confirmation. Agents must review/stage only the verified scope, verify the remote result, and record concrete blockers if publication fails. It does not authorize credentials/runtime-data publication, force-push/history rewriting, branch integration, deployment, or external-agent messaging. AGENTS.md and docs/WORKFLOW.md define the procedure; T08 includes publishing the accumulated coordination/persistence documentation.

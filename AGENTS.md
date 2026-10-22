@@ -1,6 +1,24 @@
 # Tally — instructions for every agent
 
-This is the only agent instruction entrypoint, regardless of provider. Read it before changing anything. Read `PLAN.md`, `docs/CONTRACTS.md`, `docs/DESIGN.md`, `docs/WORKFLOW.md`, and the assigned task next. `docs/RESEARCH.md` is evidence, not an implementation specification.
+This is the only agent instruction entrypoint, regardless of provider. Read it before changing anything. Read [docs/STATE.md](docs/STATE.md), `PLAN.md`, `docs/CONTRACTS.md`, `docs/DESIGN.md`, `docs/WORKFLOW.md`, and the assigned task next. `docs/RESEARCH.md` is evidence, not an implementation specification.
+
+## Durable project memory
+
+- Chat history, model memory, context summaries, and a previous agent's final reply are not durable project records. Every actionable rule, decision, constraint, requirement, assumption, rejected approach that matters, and unresolved question must be written in the appropriate repository document. Never leave necessary information only in chat.
+- Save user decisions before doing work that depends on them. Keep standing instructions here, product decisions in `PLAN.md`, interfaces/invariants in `docs/CONTRACTS.md`, design in `docs/DESIGN.md`, process in `docs/WORKFLOW.md`, operational procedures in `docs/OPERATIONS.md`, and ownership/results in the task files. Link to the authoritative record instead of maintaining conflicting copies.
+- Keep [docs/STATE.md](docs/STATE.md) as a concise, current resume checkpoint: objective, owner, branch/worktree/commit, existing work, local changes, verified checks, limits, blockers, pending decisions, temporary runtime resources, and exact next steps. Record facts separately from assumptions and user decisions.
+- Update the checkpoint and task handoff after meaningful decisions, milestones, failures, or changes of direction, before long-running work, and before ending a turn or handing off. Save incrementally; automatic compaction or interruption can happen before a final summary.
+- After compaction, interruption, or a new chat, reread the saved checkpoint and relevant canonical documents, verify them against Git and current files, and resume only the remaining work. Do not restart completed work or rely on remembered conversation details. Correct stale records when evidence changes.
+- Record whether work is local, committed, pushed, merged, or deployed, with refs/commit IDs when known. Another checkout cannot receive local-only edits. Do not claim other agents have been notified or have read new instructions without evidence; record distribution as pending until verified. Follow existing authorization rules for publishing and messaging.
+- Never persist secrets, tokens, cookies, credential values, private exports, or unnecessary personal data in documentation. Record environment variable names, safe file locations, and recreation instructions instead. Ignored files and temporary process handles are not portable handoffs.
+
+## Communication
+
+- Be factual and direct. Do not flatter the user, praise prompts, or add promotional language. State disagreement and uncertainty plainly; say when something cannot be established with reasonable precision.
+- Use evidence for factual/technical claims; distinguish creative proposals and opinions. Attribute opinions to named sources rather than vague groups.
+- Keep change summaries concise and functional. Avoid meta-chat such as “Certainly,” “Let me know,” or “Here is a draft,” and do not acknowledge instruction blocks in replies.
+- Ask questions only when they serve the task; do not add questions merely to prolong the conversation.
+- Read `/home/s3r4/.codex/RTK.md` when available for this host's command-output rules. Condensed command output is intentional; bypass it only when the result is unusable.
 
 ## Authority and scope
 
@@ -33,8 +51,15 @@ This is the only agent instruction entrypoint, regardless of provider. Read it b
 
 ## Git and parallel work
 
+- Before starting or resuming any task, fetch all configured remotes and inspect local branches, remote branches, registered worktrees, and the task ledger. Follow the mandatory preflight in [docs/WORKFLOW.md](docs/WORKFLOW.md#check-existing-work-before-implementation).
+- Search other branches' commits, diffs, and source for the requested behavior before writing it. Absence from the current branch or `main` does not mean the feature is missing. Reuse, finish, or review existing work; do not independently rebuild it.
+- Check task ownership and uncommitted work in registered worktrees before claiming overlapping files. Record inspected refs/commit IDs, existing implementation, and the remaining work in the task handoff. Repeat the check before integration or when another agent's work may have advanced.
+- If fetching or inspecting another checkout fails, record the limitation and continue only with work known not to overlap. Never treat stale refs or unpublished work as proof that no implementation exists.
 - Use isolated task branches/worktrees for parallel work, with separate development databases. Do not overwrite another agent's changes.
 - Branch names: `codex/<task-id>-<description>`. Before repository history is initialized, the integrator may prepare the initial workspace without inventing a baseline commit.
 - Always use merge commits for branch integration: `git merge --no-ff`. Do not squash or fast-forward integrations.
 - Only the integrator resolves shared-file conflicts and regenerates combined migrations. Never hand-edit generated route trees or generated migration metadata.
-- Do not push, deploy, or perform destructive operations unless the user has authorized that action. Do not contact other people or external agents on the user's behalf without authorization.
+- Standing user authorization (2026-10-22): every completed change that passes its required tests/checks must be committed and pushed to its task branch before handoff. This includes documentation and instruction changes. Do not leave passing work local-only or ask again for routine commit/push approval. Follow the [tested-change publication workflow](docs/WORKFLOW.md#commit-and-push-tested-changes).
+- Review the diff and stage only the verified task scope. Never include another agent's unrelated work, credentials, databases, backups, or generated temporary reports. Recheck any edits made after testing before committing them.
+- If checks fail, fix the change before publishing. If commit/push is blocked or fails, preserve the work and record the exact blocker, local commit state, and pending push in the checkpoint; never report a failed push as successful. Do not force-push or rewrite shared history to bypass a rejection.
+- Standing commit/push authorization does not authorize branch integration, deployment, destructive operations, or contacting other people/external agents. Those actions still require applicable user authorization.
